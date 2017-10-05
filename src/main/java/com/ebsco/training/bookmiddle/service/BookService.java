@@ -5,6 +5,7 @@ import com.ebsco.training.bookmiddle.dto.BookDto;
 import com.ebsco.training.bookmiddle.util.BookValidator;
 import com.sun.javafx.binding.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -12,15 +13,27 @@ import org.springframework.validation.ValidationUtils;
 import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
+
+    public static final String GENRE_CHILDRENS = "Childrens";
+
+    @Value("${book.includeChildrens:true}")
+    private Boolean includeChildrens;
 
     @Autowired
     private BookDao bookDao;
 
     public List<BookDto> getBooks() {
-        return bookDao.getBooks();
+        if (includeChildrens) {
+            return bookDao.getBooks();
+        } else {
+            return bookDao.getBooks().stream()
+                    .filter(book -> !book.getGenre().equals(GENRE_CHILDRENS))
+                    .collect(Collectors.toList());
+        }
     }
 
     public Optional<BookDto> getBookById(String id) {
