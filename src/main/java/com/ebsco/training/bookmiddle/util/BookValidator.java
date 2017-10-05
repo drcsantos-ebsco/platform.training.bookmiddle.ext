@@ -1,7 +1,5 @@
 package com.ebsco.training.bookmiddle.util;
 
-import com.sun.javafx.binding.StringFormatter;
-
 import javax.validation.ValidationException;
 
 public class BookValidator {
@@ -18,7 +16,7 @@ public class BookValidator {
 
     public  static void validate(String name, String value) {
         if (value == null || value.isEmpty()) {
-            throw new ValidationException(StringFormatter.format("%s must have a value", name).getValue());
+            throw new ValidationException(name + " must have a value");
         }
     }
 }
