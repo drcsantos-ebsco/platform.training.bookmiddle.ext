@@ -4,31 +4,19 @@ import com.ebsco.training.bookmiddle.dao.BookDao;
 import com.ebsco.training.bookmiddle.dto.BookDto;
 import com.ebsco.training.bookmiddle.util.BookValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-
-    public static final String GENRE_CHILDRENS = "Childrens";
-
-    @Value("${book.includeChildrens:true}")
-    private Boolean includeChildrens;
 
     @Autowired
     private BookDao bookDao;
 
     public List<BookDto> getBooks() {
-        if (includeChildrens) {
-            return bookDao.getBooks();
-        } else {
-            return bookDao.getBooks().stream()
-                    .filter(book -> !book.getGenre().equals(GENRE_CHILDRENS))
-                    .collect(Collectors.toList());
-        }
+        return bookDao.getBooks();
     }
 
     public Optional<BookDto> getBookById(String id) {
