@@ -7,12 +7,12 @@ The repo contains multiple branches, each focused on a feature:
 | Branch                 | Feature                                      | Diff
 | ---------------------- | -------------------------------------------- | ----
 | master                 | Spring-Web REST API                          | 
-| logging                | Configure log4j2 Logging and Zipkin/Sleuth   | diff[https://github.com/EBSCOIS/platform.training.bookmiddle/compare/logging]
-| test-junit             | Unit and Integration Tests (Java/JUnit)      | diff[https://github.com/EBSCOIS/platform.training.bookmiddle/compare/test-junit]
-| test-e2e               | End-to-end API Tests (Javascript/Mocha/Chai) | diff[https://github.com/EBSCOIS/platform.training.bookmiddle/compare/test-e2e]
-| configuration          | Spring Configuration and Profiles            | diff[https://github.com/EBSCOIS/platform.training.bookmiddle/compare/configuration]
-| discovery-registration | Eureka Service Discovery                     | diff[https://github.com/EBSCOIS/platform.training.bookmiddle/compare/discovery-registration]
-| circuit-breaker        | Hystrix Circuit Breaker                      | diff[https://github.com/EBSCOIS/platform.training.bookmiddle/compare/circuit-breaker]
+| logging                | Configure log4j2 Logging and Zipkin/Sleuth   | [diff](https://github.com/EBSCOIS/platform.training.bookmiddle/compare/logging)
+| test-junit             | Unit and Integration Tests (Java/JUnit)      | [diff](https://github.com/EBSCOIS/platform.training.bookmiddle/compare/test-junit)
+| test-e2e               | End-to-end API Tests (Javascript/Mocha/Chai) | [diff](https://github.com/EBSCOIS/platform.training.bookmiddle/compare/test-e2e)
+| configuration          | Spring Configuration and Profiles            | [diff](https://github.com/EBSCOIS/platform.training.bookmiddle/compare/configuration)
+| discovery-registration | Eureka Service Discovery                     | [diff](https://github.com/EBSCOIS/platform.training.bookmiddle/compare/discovery-registration)
+| circuit-breaker        | Hystrix Circuit Breaker                      | [diff](https://github.com/EBSCOIS/platform.training.bookmiddle/compare/circuit-breaker)
 
 ## Build
 
