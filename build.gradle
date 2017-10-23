@@ -52,6 +52,7 @@ ext {
     versionNumber			= '0.0.1-SNAPSHOT'
     swaggerVersion 			= '2.7.0'
     jacksonVersion 			= '2.8.5'
+    mongoDBVersion			= '1.10.4.RELEASE'
 }
 
 allprojects {
@@ -92,11 +93,13 @@ dependencies {
     // Spring-Boot dependencies
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
+    // Spring Data MongoDB
+    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: "${project.ext['mongoDBVersion']}"
 
     // Swagger dependencies
     compile group:'io.springfox', name: 'springfox-swagger2', 	version:"${project.ext['swaggerVersion']}", transitive: true
     compile group:'io.springfox', name: 'springfox-swagger-ui', version:"${project.ext['swaggerVersion']}", transitive: true
-
+    
     // Jackson Dependencies
     compile group: 'com.fasterxml.jackson.module', 		name: 'jackson-module-parameter-names', version: "${project.ext['jacksonVersion']}", transitive: true
     compile group: 'com.fasterxml.jackson.datatype', 	name: 'jackson-datatype-jdk8', 			version: "${project.ext['jacksonVersion']}", transitive: true

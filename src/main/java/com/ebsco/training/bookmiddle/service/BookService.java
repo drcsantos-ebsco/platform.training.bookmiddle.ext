@@ -4,6 +4,7 @@ import com.ebsco.training.bookmiddle.dao.BookDao;
 import com.ebsco.training.bookmiddle.dto.BookDto;
 import com.ebsco.training.bookmiddle.util.BookValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Service
 public class BookService {
 
-    @Autowired
+    @Autowired @Qualifier("MongoDBBookDao")
     private BookDao bookDao;
 
     public List<BookDto> getBooks() {

@@ -7,9 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.Id;
+
 @ApiModel(description = "A book metadata object containing unique ID and book attributes.")
 public class BookDto {
 
+    @Id
     @NotNull
     @ApiModelProperty(required = true, value = "Id", example = "1")
     private String id;
@@ -36,6 +39,10 @@ public class BookDto {
         this.title = title;
         this.author = author;
         this.genre = genre;
+    }
+    
+    public BookDto() {
+        
     }
 
     public String getId() {
