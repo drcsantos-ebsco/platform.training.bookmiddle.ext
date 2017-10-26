@@ -11,12 +11,12 @@ import com.ebsco.training.bookmiddle.dto.BookDto;
 
 @Repository
 public class BookRepository extends TrackableRepository<BookDto> {
-    
+
     public static String COLLECTION = "books";
-    
+
     @Value("${sqs.queueUrl}")
-    private String queueUrl; 
-    
+    private String queueUrl;
+
     @Autowired
     private MongoOperations mongoOperation;
 
@@ -28,7 +28,7 @@ public class BookRepository extends TrackableRepository<BookDto> {
 
     @Override
     protected BookDto insertData(BookDto value) {
-        
+
         mongoOperation.insert(value, BookRepository.COLLECTION);
         return value;
     }
