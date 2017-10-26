@@ -4,26 +4,23 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
 import com.ebsco.training.bookmiddle.dto.BookDto;
+import com.ebsco.training.bookmiddle.repository.BookRepository;
 
 @Repository("MongoDBBookDao")
 public class MongoDBBookDao implements BookDao {
     
-    public static String COLLECTION = "books";
-    
-    @Autowired @Qualifier("mongoTemplate")
-    private MongoOperations mongoOperation;
+    @Autowired
+    private BookRepository repository;
 
     /* (non-Javadoc)
      * @see com.ebsco.training.bookmiddle.dao.BookDao#getBooks()
      */
     @Override
     public List<BookDto> getBooks() {
-        return mongoOperation.findAll(BookDto.class, this.COLLECTION);
+        return repository.find();
     }
 
     /* (non-Javadoc)
@@ -31,7 +28,7 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public Optional<BookDto> getBookById(String id) {
-        return Optional.of(mongoOperation.findById(id, BookDto.class, this.COLLECTION));
+        return Optional.of(repository.findById(id));
     }
 
     /* (non-Javadoc)
@@ -39,11 +36,11 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public Optional<BookDto> deleteBook(String id) {
-        Optional<BookDto> result = this.getBookById(id);
-        if (result.isPresent()) {
-            mongoOperation.remove(result.get(), this.COLLECTION);
+        BookDto result = repository.findById(id);
+        if (result != null) {
+            repository.delete(result);
         }
-        return result;
+        return Optional.of(result);
     }
 
     /* (non-Javadoc)
@@ -51,10 +48,10 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public BookDto createBook(String title, String author, String genre) {
-        BookDto instance = new BookDto(null, title, author, genre);
-        mongoOperation.insert(instance, this.COLLECTION);
+        BookDto result = new BookDto(null, title, author, genre);
+        repository.insert(result);
         
-        return instance;
+        return result;
     }
 
     /* (non-Javadoc)
@@ -62,15 +59,14 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public Optional<BookDto> updateBook(String id, String title, String author, String genre) {
-        Optional<BookDto> result = this.getBookById(id);
-        if (result.isPresent()) {
-            BookDto instance = result.get();
-            instance.setTitle(title);
-            instance.setAuthor(author);
-            instance.setGenre(genre);
+        BookDto result = repository.findById(id);
+        if (result != null) {
+            result.setTitle(title);
+            result.setAuthor(author);
+            result.setGenre(genre);
             
-            mongoOperation.save(instance, this.COLLECTION);
+            repository.update(result);
         }
-        return result;
+        return Optional.of(result);
     }
 }

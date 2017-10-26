@@ -12,6 +12,9 @@ mongoDB:
   database: bookDB
   host: 127.0.0.1
   port: 27017
+  
+sqs:
+  queueUrl: https://sqs.us-east-2.amazonaws.com/404669482207/book-track.fifo
 
 swagger:
   title: BookMiddle Service REST APIs

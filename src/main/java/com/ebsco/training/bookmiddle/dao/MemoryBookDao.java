@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Primary
 @Repository
-public class MemoyBookDao implements BookDao {
+public class MemoryBookDao implements BookDao {
 
     private Map<String, BookDto> booksById = new HashMap();
     private Integer idCounter = 1;

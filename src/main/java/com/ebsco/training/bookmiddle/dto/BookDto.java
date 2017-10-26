@@ -5,12 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 
 @ApiModel(description = "A book metadata object containing unique ID and book attributes.")
-public class BookDto {
+public class BookDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @NotNull
