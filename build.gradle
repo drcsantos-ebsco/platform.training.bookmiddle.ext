@@ -109,9 +109,23 @@ dependencies {
     compile group: 'com.fasterxml.jackson.datatype', 	name: 'jackson-datatype-jsr310',		version: "${project.ext['jacksonVersion']}", transitive: true
 }
 
+task pathingJar(type: Jar) {
+     dependsOn configurations.runtime
+     appendix = 'pathing'
+
+     doFirst {
+        manifest {
+            attributes "Class-Path": configurations.runtime.files.collect {it.toURL().toString().replaceFirst("file:/", '/')}.join(" ")
+        }
+    }
+}
+
 bootRun {
-    // support passing -Dsystem.property=value to bootRun task
-    systemProperties = System.properties
+	systemProperties = System.properties
+    dependsOn pathingJar
+    doFirst {
+        classpath = files("$buildDir/classes/main", "$buildDir/resources/main", pathingJar.archivePath)
+    }
 }
 
 run{
