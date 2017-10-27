@@ -122,7 +122,7 @@ This project was based on [platform.training.bookmiddle](https://github.com/EBSC
 The application uses your **default** credential profile by reading from the credentials file located at (~/.aws/credentials).
 For more information about see [Configuration and Credential Files](http://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
 
-## Application Config
+### Application Config
 Look to _application.yml_.
 ```
 mongoDB:
