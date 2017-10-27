@@ -54,7 +54,12 @@ For more information on installation, including supported platforms and installa
 [Install MongoDB Community Edition on Windows](https://docs.mongodb.com/getting-started/shell/tutorial/install-mongodb-on-windows/)
 
 
+## Amazon Simple Queue Service
+Amazon Simple Queue Service (Amazon SQS) is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications. Amazon SQS moves data between distributed application components and helps you decouple these components. For more information about see [SQS Documentation](https://aws.amazon.com/pt/documentation/sqs/)
+
+
 ## Bookmiddle Project
+This project was based on [platform.training.bookmiddle](https://github.com/EBSCOIS/platform.training.bookmiddle) developed by [Michael Panson](https://github.com/mp-ebsco). The original project was changed to support data persistence in mongodb as well as a trace of each operation that modifies the data of each document to record those changes in a FIFO queue using AWS SQS.
 
 ## Build
 
