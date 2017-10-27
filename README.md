@@ -67,6 +67,22 @@ This project was based on [platform.training.bookmiddle](https://github.com/EBSC
 The application uses your **default** credential profile by reading from the credentials file located at (~/.aws/credentials).
 For more information about see [Configuration and Credential Files](http://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
 
+## Application Config
+Look to _application.yml_.
+```
+mongoDB:
+  database: bookDB
+  host: 127.0.0.1
+  port: 27017
+  
+sqs:
+  queueUrl: https://sqs.us-east-2.amazonaws.com/404669482207/book-track.fifo
+```
+- **sqs.queueUrl:** Url to AWS SQS queue. Amazon SQS assigns each queue you create an identifier called a queue URL that includes the queue name and other Amazon SQS components. Whenever you want to perform an action on a queue, you provide its queue URL.. In your system, always store the entire queue URL exactly as Amazon SQS returns it to you when you create the queue (for example, http://sqs.us-east-2.amazonaws.com/123456789012/queue2). Don't build the queue URL from its separate components each time you need to specify the queue URL in a request because Amazon SQS can change the components that make up the queue URL.
+- **mongoDB.database:** Type name used to persist the document.
+- **mongoDB.host:** Host to access the MongoDB. Normally 127.0.0.1 when we are running it locally.
+- **mongoDB.port:** Host to access the MongoDB. Normally 27017 when we are running it locally.
+
 ## Build
 
 `$ gradle build`
