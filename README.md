@@ -61,6 +61,12 @@ Amazon Simple Queue Service (Amazon SQS) is a fully managed message queuing serv
 ## Bookmiddle Project
 This project was based on [platform.training.bookmiddle](https://github.com/EBSCOIS/platform.training.bookmiddle) developed by [Michael Panson](https://github.com/mp-ebsco). The original project was changed to support data persistence in mongodb as well as a trace of each operation that modifies the data of each document to record those changes in a FIFO queue using AWS SQS.
 
+## Set up
+
+### AWS Credentials
+The application uses your **default** credential profile by reading from the credentials file located at (~/.aws/credentials).
+For more information about see [Configuration and Credential Files](http://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
+
 ## Build
 
 `$ gradle build`
