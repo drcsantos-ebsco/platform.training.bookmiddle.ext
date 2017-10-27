@@ -53,6 +53,61 @@ For more information on installation, including supported platforms and installa
 
 [Install MongoDB Community Edition on Windows](https://docs.mongodb.com/getting-started/shell/tutorial/install-mongodb-on-windows/)
 
+### Components
+
+- **mongod:** The database server.
+- **mongos:** Sharding router.
+- **mongo:** The database shell (uses interactive javascript).
+
+### Utilities
+
+- **mongodump:** Create a binary dump of the contents of a database.
+- **mongorestore:** Restore data from the output created by mongodump.
+- **mongoexport:** Export the contents of a collection to JSON or CSV.
+- **mongoimport:** Import data from JSON, CSV or TSV.
+- **mongofiles:** Put, get and delete files from GridFS.
+- **mongostat:** Show the status of a running mongod/mongos.
+- **bsondump:** Convert BSON files into human-readable formats.
+- **mongoreplay:** Traffic capture and replay tool.
+- **mongotop:** Track time spent reading and writing data.
+
+### Running MongoDB
+
+For command line options invoke:
+
+```
+$ ./mongod --help
+```
+
+To run a single server database:
+
+```
+$ sudo mkdir -p /data/db
+$ ./mongod
+$
+$ # The mongo javascript shell connects to localhost and test database by default:
+$ ./mongo
+> help
+```
+
+### Drivers
+
+Client drivers for most programming languages are available at https://docs.mongodb.com/manual/applications/drivers/. Use the shell
+("mongo") for administrative tasks.
+
+### Documentation
+
+See (https://docs.mongodb.com/manual/)
+
+### Cloud Hosted MongoDB
+
+See https://www.mongodb.com/cloud/atlas
+
+
+### Learn MongoDB
+
+See (https://university.mongodb.com/)
+
 
 ## Amazon Simple Queue Service
 Amazon Simple Queue Service (Amazon SQS) is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications. Amazon SQS moves data between distributed application components and helps you decouple these components. For more information about see [SQS Documentation](https://aws.amazon.com/pt/documentation/sqs/)
