@@ -7,6 +7,9 @@ spring:
 
 server:
   port: ${service.port:8080}
+  
+sqs:
+  queueUrl: https://sqs.us-east-2.amazonaws.com/404669482207/book-track.fifo
 
 mongoDB:
   database: bookDB
@@ -24,7 +27,7 @@ swagger:
   
 --- 
 spring:
-    profile: "non-test"
+    profile: "test"
     
 sqs:
-    queueUrl: https://sqs.us-east-2.amazonaws.com/404669482207/book-track.fifo
+    queueUrl: http://localhost:4576/queue/queue-name
