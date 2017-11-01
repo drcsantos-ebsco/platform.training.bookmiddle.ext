@@ -37,5 +37,5 @@ spring:
     profile: "test"
     
 sqs:
-    queueUrl: http://localhost:4576/queue/Megalodon-Queue
+    queueUrl: http://localhost:4576/queue/queue-name
 
