@@ -1,26 +1,30 @@
 package com.ebsco.training.bookmiddle.dao;
 
-import java.util.List;
-import java.util.Optional;
+import com.ebsco.training.bookmiddle.dto.BookDto;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import com.ebsco.training.bookmiddle.dto.BookDto;
-import com.ebsco.training.bookmiddle.repository.BookRepository;
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-@Repository("MongoDBBookDao")
-public class MongoDBBookDao implements BookDao {
-    
-    @Autowired
-    private BookRepository repository;
+@Primary
+@Repository
+public class MemoryBookDao implements BookDao {
+
+    private Map<String, BookDto> booksById = new HashMap();
+    private Integer idCounter = 1;
 
     /* (non-Javadoc)
      * @see com.ebsco.training.bookmiddle.dao.BookDao#getBooks()
      */
     @Override
     public List<BookDto> getBooks() {
-        return repository.find();
+        return new ArrayList(booksById.values());
     }
 
     /* (non-Javadoc)
@@ -28,7 +32,7 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public Optional<BookDto> getBookById(String id) {
-        return Optional.of(repository.findById(id));
+        return Optional.ofNullable(booksById.get(id));
     }
 
     /* (non-Javadoc)
@@ -36,11 +40,7 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public Optional<BookDto> deleteBook(String id) {
-        BookDto result = repository.findById(id);
-        if (result != null) {
-            repository.delete(result);
-        }
-        return Optional.of(result);
+        return Optional.ofNullable(booksById.remove(id));
     }
 
     /* (non-Javadoc)
@@ -48,10 +48,9 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public BookDto createBook(String title, String author, String genre) {
-        BookDto result = new BookDto(null, title, author, genre);
-        repository.insert(result);
-        
-        return result;
+        String id = String.valueOf(idCounter++);
+        booksById.put(id, new BookDto(id, title, author, genre));
+        return booksById.get(id);
     }
 
     /* (non-Javadoc)
@@ -59,14 +58,20 @@ public class MongoDBBookDao implements BookDao {
      */
     @Override
     public Optional<BookDto> updateBook(String id, String title, String author, String genre) {
-        BookDto result = repository.findById(id);
+        BookDto result = booksById.get(id);
         if (result != null) {
             result.setTitle(title);
             result.setAuthor(author);
             result.setGenre(genre);
-            
-            repository.update(result);
         }
-        return Optional.of(result);
+        return Optional.ofNullable(result);
+    }
+
+    @PostConstruct
+    void createGreetings() {
+        createBook("A Farewell to Arms", "Ernest Hemingway", "Fiction");
+        createBook("Cryptonomicon", "Neal Stephenson", "Fiction");
+        createBook("Genghis Khan and the Making of the Modern World", "Jack Weatherford", "History");
+        createBook("Goodnight Moon", "Margaret Wise Brown", "Childrens");
     }
 }
