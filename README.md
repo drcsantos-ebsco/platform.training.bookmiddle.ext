@@ -116,6 +116,74 @@ Amazon Simple Queue Service (Amazon SQS) is a fully managed message queuing serv
 ## Bookmiddle Project
 This project was based on [platform.training.bookmiddle](https://github.com/EBSCOIS/platform.training.bookmiddle) developed by [Michael Panson](https://github.com/mp-ebsco). The original project was changed to support data persistence in mongodb as well as a trace of each operation that modifies the data of each document to record those changes in a FIFO queue using AWS SQS.
 
+## AWS Mock
+### How to set-up Localstack
+LocalStack provides an easy-to-use test/mocking framework for developing Cloud applications. When testing the application locally, instead of using the real AWS queues and topics, use localstack.
+#### Install via docker
+[Official repository](https://hub.docker.com/r/localstack/localstack/)
+
+Create and run a container
+```bash
+docker run --name localstack-title -p 4575:4575 -p 4576:4576 -p 8080:8080 localstack/localstack:latest
+```
+Start a existing container
+```bash
+docker start localstack-title
+```
+#### Useful commands for localstack
+
+##### SNS
+Listing existing topics:
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4575 sns list-topics
+```
+
+Create a new topic:
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4575 sns create-topic --name topic-name
+```
+
+Subscribe to the topic
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4575 sns subscribe --topic-arn arn:aws:sns:us-east-1:123456789012:topic-name --protocol email --notification-endpoint emailAtDomainDotCom
+```
+
+List subscriptions
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4575 sns list-subscriptions
+```
+
+Publish to this topic
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4575 sns publish  --topic-arn arn:aws:sns:us-east-1:123456789012:topic-name --message 'Hello World!'
+```
+
+##### SQS
+Create a Queue
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4576 sqs create-queue --queue-name queue_name
+```
+
+List existing queues
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4576 sqs list-queues
+```
+
+Send a message to this queue
+```bash
+bash-3.2$  aws --endpoint-url=http://localhost:4576 sqs send-message --queue-url http://localhost:4576/queue/queue_name --message-body 'Test Message!'
+```
+
+Receive the message from this queue
+```bash
+bash-3.2$  aws --endpoint-url=http://localhost:4576 sqs receive-message --queue-url http://localhost:4576/queue/queue_name
+```
+
+Delete this message
+```bash
+bash-3.2$ aws --endpoint-url=http://localhost:4576 sqs delete-message --queue-url http://localhost:4576/queue/queue_name --receipt-handle 'yugzzebhnnksfuvbjlibfnlejyqbulxqfegsnrgafjeabxaatxbmeiyfkfliedslohseosgjwkxhdzllpudhccjhorpkwbgjgyzeyzjwkfvqflathnvsmugeyevbqmfyqanuxetvdhcetseuwzrqpexogzggznndxmbqowtlalvqtffntdahhihel'
+```
+
 ## Set up
 
 ### AWS Credentials
