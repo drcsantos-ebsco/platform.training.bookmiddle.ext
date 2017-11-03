@@ -7,6 +7,9 @@ spring:
 
 server:
   port: ${service.port:8080}
+  
+sqs:
+  queueUrl: https://sqs.us-east-2.amazonaws.com/404669482207/book-track.fifo
 
 mongoDB:
   database: bookDB
@@ -24,3 +27,10 @@ swagger:
     url: http://www.ebsco.com
     email: mpanson@ebsco.com
   version: 1.0.0
+  
+--- 
+spring:
+    profile: "test"
+    
+sqs:
+    queueUrl: http://localhost:4576/queue/queue-name
