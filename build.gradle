@@ -93,9 +93,14 @@ dependencies {
     // Spring-Boot dependencies
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-test')
+
     // Spring Data MongoDB
     compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: "${project.ext['mongoDBVersion']}"
-    
+
+    // Embedded MongoDB dependencies
+    testCompile group: "de.flapdoodle.embed", name: "de.flapdoodle.embed.mongo", version: "2.0.0"
+
     // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
     compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.220'
 
